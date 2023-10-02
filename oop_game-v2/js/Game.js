@@ -66,9 +66,11 @@ class Game {
     checkForWin() {
         //const phrase = this.activePhrase.phrase.split('');
         const check = false;
-        ul.forEach(li => {
-            if(ul.classList.contains('show')) {
+        li.forEach(li => {
+            if(li.classList.contains('show')) {
                 check = true;
+            } else {
+                check = false;
             }
         });
         return check;
