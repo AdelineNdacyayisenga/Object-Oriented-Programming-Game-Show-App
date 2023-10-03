@@ -107,7 +107,7 @@ class Game {
         ul.innerHTML = '';
         buttons.forEach(button => {
             if(button.tagName === "BUTTON") {
-                
+                //console.log(button.innerHTML);
                 if(button.className.includes('wrong')) {
                     button.disabled = false;
                     button.classList.remove('wrong');
@@ -136,10 +136,12 @@ class Game {
         startScreen.style.display = 'block';
         if(gameWon === true) {
             gameOverMessage.textContent = "Congratulations, you guessed the phrase correctly!";
-            startScreen.classList.replace('start', 'win');
+            startScreen.classList.remove('lose');
+            startScreen.classList.add('win');
         } else {
             gameOverMessage.textContent = "Sorry. Better luck next time!";
-            startScreen.classList.replace('start', 'lose');
+            startScreen.classList.remove('win');
+            startScreen.classList.add('lose');
         }
         this.reset();  
     }

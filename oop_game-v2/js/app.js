@@ -1,7 +1,8 @@
 /* Treehouse FSJS Techdegree
-@author Adeline Ndacyayisenga
+ @author Adeline Ndacyayisenga
  * Project 4 - OOP Game App
- * app.js */
+ * app.js 
+ */
 
 /**
  * We create a new instance of the 'Game' class and add event listeners for the start button
@@ -29,8 +30,14 @@ div.addEventListener('click', e => {
     } 
 });
 
-div.addEventListener('keydown', e => {
-    if(e.target.tagName === 'BUTTON') {
-        game.handleInteraction(e.target);
-    }
+const btns = document.querySelectorAll(".key");
+document.addEventListener('keydown', e => {
+    btns.forEach (button => {
+        if(e.key === button.innerText) {
+            game.handleInteraction(button);
+        }
+    });
 });
+
+    
+
