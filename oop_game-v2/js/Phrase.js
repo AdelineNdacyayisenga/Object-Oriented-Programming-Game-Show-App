@@ -57,13 +57,6 @@ class Phrase {
             });
         }
     }
-
-    /**
-     * Hide phrase
-     */
-    hidePhrase () {
-        
-    }
 }
 
 

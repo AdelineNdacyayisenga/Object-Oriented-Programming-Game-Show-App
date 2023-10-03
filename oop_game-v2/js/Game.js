@@ -11,6 +11,7 @@
  */
 let startScreen = document.querySelector("#overlay");
 const gameOverMessage = document.querySelector('#game-over-message');
+const buttons = document.querySelectorAll(".key");
 
 class Game {
     constructor () {
@@ -98,6 +99,31 @@ class Game {
         
     }
 
+    reset() {
+        ul.innerHTML = '';
+        buttons.forEach(button => {
+            if(button.tagName === "BUTTON") {
+                
+                if(button.className.includes('wrong')) {
+                    button.disabled = false;
+                    button.classList.remove('wrong');
+                } else {
+                    button.disabled = false;
+                    button.classList.remove('chosen');
+                }
+                
+            }
+        });
+
+        let hearts = document.querySelectorAll('img');
+        hearts.forEach(heart => {
+            heart.src = "images/liveHeart.png";
+        });
+
+        this.activePhrase = this.getRandomPhrase();
+        this.activePhrase.addPhraseToDisplay();
+    }
+
     /**
      * Displays game over message
      * @param {boolean} gameWon - Whether or not the user won the game
@@ -111,5 +137,7 @@ class Game {
             gameOverMessage.textContent = "Sorry. Better luck next time!";
             startScreen.classList.replace('start', 'lose');
         }
+        this.reset();
+        
     }
 }

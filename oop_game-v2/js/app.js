@@ -44,6 +44,7 @@ startGame.addEventListener('click', e => {
     game.phrases.push(phrase4);
     game.phrases.push(phrase5);
     game.startGame();
+    game.reset();
 
 });
 
