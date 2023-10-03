@@ -10,10 +10,8 @@
  * The class responsible for managing the game's state, logic, and interactions
  */
 let startScreen = document.querySelector("#overlay");
-
 const gameOverMessage = document.querySelector('#game-over-message');
 
-//console.log(heartImages);
 class Game {
     constructor () {
         this.missed = 0;
@@ -43,7 +41,6 @@ class Game {
      * @param {HTMLButtonElement} button - The clicked button element
      */
     handleInteraction(button) {
-        button.disabled = false;
         
         if(this.activePhrase.phrase.includes(button.innerHTML)) {
             button.classList.add('chosen');
@@ -51,7 +48,7 @@ class Game {
             this.activePhrase.showMatchedLetter(button.innerHTML);
             this.checkForWin();
             if(this.checkForWin() === true) {
-                this.gameOver();
+                this.gameOver(this.checkForWin());
             }
         } else {
             button.classList.add('wrong');
@@ -69,15 +66,14 @@ class Game {
         let hearts = document.querySelectorAll('img');
         let aliveHearts = [];
         for(let i = 0; i < hearts.length; i++) {
-            //"file:///Users/andacyayise/Documents/Object-Oriented-Programming-Game-Show-App/oop_game-v2/images/liveHeart.png"
-            if(hearts[i].src === ("file:///Users/andacyayise/Documents/Object-Oriented-Programming-Game-Show-App/oop_game-v2/images/liveHeart.png")) {
+            if(hearts[i].src.includes("images/liveHeart.png")) {
                 aliveHearts.push(hearts[i]);
             }
         }
         aliveHearts[0].src = "images/lostHeart.png";
         this.missed += 1;
         if(this.missed === 5) {
-            this.gameOver();
+            this.gameOver(false);
         }
     }
 

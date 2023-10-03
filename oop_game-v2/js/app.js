@@ -17,14 +17,9 @@ const phrase3 = new Phrase('never give up');
 const phrase4 = new Phrase('always work hard');
 const phrase5 = new Phrase('Be kind');
 
-//add the phrases to the the phrases array
 
-const game = new Game();
-game.phrases.push(phrase1);
-game.phrases.push(phrase2);
-game.phrases.push(phrase3);
-game.phrases.push(phrase4);
-game.phrases.push(phrase5);
+//const game = new Game();
+
 
 // game.phrases.forEach((phrase, index) => {
 //     console.log(`Phrase ${index} - phrase: ${phrase.phrase}`);
@@ -40,9 +35,16 @@ game.phrases.push(phrase5);
  * The event listener for the 'Start Game' button
  */
 
-
+let game;
 startGame.addEventListener('click', e => {
+    game = new Game();
+    game.phrases.push(phrase1);
+    game.phrases.push(phrase2);
+    game.phrases.push(phrase3);
+    game.phrases.push(phrase4);
+    game.phrases.push(phrase5);
     game.startGame();
+
 });
 
 /**
