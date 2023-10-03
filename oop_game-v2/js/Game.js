@@ -49,11 +49,10 @@ class Game {
             button.classList.add('chosen');
             button.disabled = true;
             this.activePhrase.showMatchedLetter(button.innerHTML);
-            //this.checkForWin();
-            if(this.checkForWin () === true) {
-                this.gameOver(this.checkForWin());
+            this.checkForWin();
+            if(this.checkForWin() === true) {
+                this.gameOver();
             }
-            
         } else {
             button.classList.add('wrong');
             button.disabled = true;
@@ -87,16 +86,20 @@ class Game {
      * @returns {boolean} True if game has been won, false if game wasn't won
      */
     checkForWin() {
-        const lists = document.querySelectorAll('ul li');
-        let check = false;
-        lists.forEach(li => {
-            if(li.classList.contains('show')) {
-                check = true;
-            } else {
-                check = false;
+        let listItems = document.querySelectorAll('li.letter');
+        let hides = 0;
+        
+        listItems.forEach(li => {
+            if(li.classList.value.includes("hide")) {
+                hides += 1;
             }
         });
-        return check;
+        if (hides === 0) {
+            return true;
+        } else {
+            return false;
+        }
+        
     }
 
     /**
