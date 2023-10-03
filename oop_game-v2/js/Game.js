@@ -10,9 +10,9 @@
  * The class responsible for managing the game's state, logic, and interactions
  */
 let startScreen = document.querySelector("#overlay");
-const heartImages = document.querySelectorAll('#scoreboard img');
+
 const gameOverMessage = document.querySelector('#game-over-message');
-const li = document.querySelectorAll('#phrase li.letter');
+
 //console.log(heartImages);
 class Game {
     constructor () {
@@ -38,23 +38,46 @@ class Game {
         return this.phrases[random];
     }
 
-    //controls the game logic. Checks to see if the button clicked by the player matches a letter in the phrase
-    //and directs the game based on a correct or incorrect guess
-    handleInteraction() {
-
+    /**
+     * Handles onscreen keyboard button clicks
+     * @param {HTMLButtonElement} button - The clicked button element
+     */
+    handleInteraction(button) {
+        button.disabled = false;
+        
+        if(this.activePhrase.phrase.includes(button.innerHTML)) {
+            button.classList.add('chosen');
+            button.disabled = true;
+            this.activePhrase.showMatchedLetter(button.innerHTML);
+            //this.checkForWin();
+            if(this.checkForWin () === true) {
+                this.gameOver(this.checkForWin());
+            }
+            
+        } else {
+            button.classList.add('wrong');
+            button.disabled = true;
+            this.removeLife();
+        }
     }
     /**
      * Increases the value of the missed property
      * Removes a life from the scoreboard
      * Checks if player has remaining lives and ends game if player is out
      */
+    
     removeLife() {
-        const liveHearts = heartImages.filter(image => {
-            image.src = "images/liveHeart.png";
-        });
-        liveHearts[0].src = "images/lostHeart.png";
+        let hearts = document.querySelectorAll('img');
+        let aliveHearts = [];
+        for(let i = 0; i < hearts.length; i++) {
+            //"file:///Users/andacyayise/Documents/Object-Oriented-Programming-Game-Show-App/oop_game-v2/images/liveHeart.png"
+            if(hearts[i].src === ("file:///Users/andacyayise/Documents/Object-Oriented-Programming-Game-Show-App/oop_game-v2/images/liveHeart.png")) {
+                aliveHearts.push(hearts[i]);
+            }
+        }
+        aliveHearts[0].src = "images/lostHeart.png";
         this.missed += 1;
-        if (this.missed = 5) {
+        if(this.missed === 5) {
             this.gameOver();
         }
     }
@@ -64,9 +87,9 @@ class Game {
      * @returns {boolean} True if game has been won, false if game wasn't won
      */
     checkForWin() {
-        //const phrase = this.activePhrase.phrase.split('');
-        const check = false;
-        li.forEach(li => {
+        const lists = document.querySelectorAll('ul li');
+        let check = false;
+        lists.forEach(li => {
             if(li.classList.contains('show')) {
                 check = true;
             } else {
@@ -74,7 +97,6 @@ class Game {
             }
         });
         return check;
-
     }
 
     /**
@@ -85,13 +107,10 @@ class Game {
         startScreen.style.display = 'block';
         if(gameWon === true) {
             gameOverMessage.textContent = "Congratulations, you guessed the phrase correctly!";
-            startScreen.classList.replace('start', 'love');
-            //startScreen.classList.remove('start');
-            //startScreen.classList.add('win');
+            startScreen.classList.replace('start', 'win');
         } else {
-            gameOverMessage.textContent = "Ooops, at least one letter wasn't correct. Please play again.";
-            startScreen.classList.replace('start', 'love');
+            gameOverMessage.textContent = "Sorry. Better luck next time!";
+            startScreen.classList.replace('start', 'lose');
         }
     }
-
 }

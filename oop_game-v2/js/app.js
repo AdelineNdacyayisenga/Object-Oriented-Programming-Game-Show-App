@@ -9,6 +9,8 @@
  */
 
 const startGame = document.getElementById('btn__reset');
+const div = document.querySelector('#qwerty');
+
 const phrase1 = new Phrase('focus on the future');
 const phrase2 = new Phrase('You are amazing');
 const phrase3 = new Phrase('never give up');
@@ -43,4 +45,12 @@ startGame.addEventListener('click', e => {
     game.startGame();
 });
 
+/**
+ * Onscreen keyboard buttons' click event listener
+ */
 
+div.addEventListener('click', e => {
+    if(e.target.tagName === 'BUTTON') {
+        game.handleInteraction(e.target);
+    } 
+});
