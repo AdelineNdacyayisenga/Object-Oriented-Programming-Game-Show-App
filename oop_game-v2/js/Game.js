@@ -12,11 +12,16 @@
 let startScreen = document.querySelector("#overlay");
 const gameOverMessage = document.querySelector('#game-over-message');
 const buttons = document.querySelectorAll(".key");
+const phrase1 = new Phrase('focus on the future');
+const phrase2 = new Phrase('You are amazing');
+const phrase3 = new Phrase('never give up');
+const phrase4 = new Phrase('always work hard');
+const phrase5 = new Phrase('Be kind');
 
 class Game {
     constructor () {
         this.missed = 0;
-        this.phrases = [];
+        this.phrases = [phrase1, phrase2, phrase3, phrase4, phrase5];
         this.activePhrase = null; //the Phrase object currently in play
     }
     /**
@@ -95,8 +100,7 @@ class Game {
             return true;
         } else {
             return false;
-        }
-        
+        }  
     }
 
     reset() {
@@ -137,7 +141,6 @@ class Game {
             gameOverMessage.textContent = "Sorry. Better luck next time!";
             startScreen.classList.replace('start', 'lose');
         }
-        this.reset();
-        
+        this.reset();  
     }
 }

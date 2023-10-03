@@ -15,7 +15,7 @@ class Phrase {
         this.phraseArray = phrase.toLowerCase().split('');
     }
     /**
-     * Display phrase on game board
+     * Add phrase on game board
      */
     addPhraseToDisplay() {
         ul.innerHTML = ``;
