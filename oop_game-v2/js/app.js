@@ -30,8 +30,21 @@ div.addEventListener('click', e => {
     } 
 });
 
+// const btns = document.querySelectorAll(".key");
+// document.addEventListener('keydown', e => {
+//     if(game){
+//         btns.forEach (button => {
+//             if(e.key === button.innerText && !button.classList.contains('wrong') && !button.classList.contains('chosen') ){
+//                 game.handleInteraction(button);
+//             }
+//         });
+//     }
+// });
+
+//Another way
 const btns = document.querySelectorAll(".key");
 document.addEventListener('keydown', e => {
+    if (startGame.parentElement.style.display !== 'none') return
     btns.forEach (button => {
         if(e.key === button.innerText && !button.classList.contains('wrong') && !button.classList.contains('chosen') ){
             game.handleInteraction(button);
